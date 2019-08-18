@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="rupee" size="0.080000 0.041100" />
+    <ImageTarget name="bill" size="0.180000 0.135000" />
+    <ImageTarget name="index" size="0.060000 0.084000" />
+  </Tracking>
+</QCARConfig>
