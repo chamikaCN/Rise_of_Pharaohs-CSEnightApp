@@ -2,75 +2,72 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TargetHandler : MonoBehaviour
 {
+    int GroupID,artifacts;
+    public Text artifactText;
+    public GameObject progressPanel, Date, Time, Venue, Night, Pharaohs;
+    public GameObject[] texts;
 
-    public Toggle changer;
-    public GameObject item1, item2, item3, item4;
-    int GroupID;
-    // Start is called before the first frame update
     void Start()
     {
-        changer.isOn = true;
-        //item1 = GetComponent<Transform>().GetChild(0).gameObject;
-        //item2 = GetComponent<Transform>().GetChild(1).gameObject;
-        //item3 = GetComponent<Transform>().GetChild(2).gameObject;
-        //item4 = GetComponent<Transform>().GetChild(3).gameObject;
-        item1.SetActive(true);
-        item2.SetActive(false);
-        item3.SetActive(false);
-        item4.SetActive(false);
         GroupID = PlayerPrefs.GetInt("Group ID");
+        artifacts = 0;
+        artifactText.text = "ARTIFACTS   0";
+        progressPanel.SetActive(false);
+        texts = new GameObject[5];
+        texts[0] = Night;
+        texts[1] = Pharaohs;
+        texts[2] = Date;
+        texts[3] = Time;
+        texts[4] = Venue;
+        for(int j = 0; j < 5; j++)
+        {
+            texts[j].SetActive(false);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        /*if(changer.isOn == true)
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("On");
-            item1.SetActive(false);
-            item2.SetActive(true);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray,out hit,1<<8))
+            {
+                if(hit.collider.name == "Pharaoh")
+                {
+                    Destroy(hit.collider.gameObject);
+                    collectArtifact();
+                }
+            }
         }
-        else if(changer.isOn == false)
-        {
-            Debug.Log("off");
-            item2.SetActive(false);
-            item1.SetActive(true);
-        }*/
 
-        switch (GroupID)
+        if (artifacts >= 6)
         {
-            case 1:
-                Debug.Log(" 1 is On");
-                item1.SetActive(true);
-                item2.SetActive(false);
-                item3.SetActive(false);
-                item4.SetActive(false);
-                break;
-            case 2:
-                Debug.Log(" 2 is On");
-                item1.SetActive(false);
-                item2.SetActive(true);
-                item3.SetActive(false);
-                item4.SetActive(false);
-                break;
-            case 3:
-                Debug.Log(" 3 is On");
-                item1.SetActive(false);
-                item2.SetActive(false);
-                item3.SetActive(true);
-                item4.SetActive(false);
-                break;
-            case 4:
-                Debug.Log(" 4 is On");
-                item1.SetActive(false);
-                item2.SetActive(false);
-                item3.SetActive(false);
-                item4.SetActive(true);
-                break;
-
+            progressPanel.SetActive(true);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("IndexPart");
+        }
+    }
+
+    public void collectArtifact()
+    {
+        if (artifacts < 5)
+        {
+            texts[artifacts].SetActive(true);
+        }
+        artifacts += 1;
+        artifactText.text = "ARTIFACTS   " + artifacts;
+    }
+
+    public void progressFaction()
+    {
+        SceneManager.LoadScene("ChoosingPart");
     }
 }
