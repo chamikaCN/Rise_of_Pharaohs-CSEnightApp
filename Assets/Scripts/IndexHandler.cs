@@ -9,7 +9,7 @@ public class IndexHandler : MonoBehaviour
     public InputField indexInput;
     public Button submitButton;
     public GameObject revealPanel,factionButton, infoButton;
-    public Text messagetext;
+    public Text messagetext, infotext;
     public int primeDivider;
     int indexNumber;
     int groupID;
@@ -47,6 +47,7 @@ public class IndexHandler : MonoBehaviour
     public void openPanel()
     {
         revealPanel.SetActive(true);
+        infotext.text = "on 29th october\n@ night\nin the " + PlayerPrefs.GetString("Gatherplace");
     }
 
     public void closePanel()

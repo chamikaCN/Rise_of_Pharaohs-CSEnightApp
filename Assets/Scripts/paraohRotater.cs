@@ -16,6 +16,6 @@ public class paraohRotater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pharaohTransform.Rotate(new Vector3(0f,0f, rotationspeed * Time.deltaTime));
+        pharaohTransform.Rotate(new Vector3(0f, rotationspeed * Time.deltaTime, 0f ));
     }
 }

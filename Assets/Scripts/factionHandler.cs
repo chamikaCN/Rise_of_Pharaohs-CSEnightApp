@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Vuforia;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class factionHandler : MonoBehaviour
 {
     int GroupID;
-    public GameObject item1, item2, item3, item4, target;
-    public Text topText, loadingText, groupText;
+    public GameObject item1, item2, item3, item4, button;
+    public Text topText, loadingText;
+    public TextMeshProUGUI groupText;
     string fullText, loadingfullText, trackingStatus, imageTargetname, groupName;
 
     void Start()
     {
-        fullText = "your team is";
+        fullText = "you belong to the followers of";
         loadingfullText = " 0 0 0 0 0 0";
         imageTargetname = "ImageTarget";
         GroupID = PlayerPrefs.GetInt("Group ID");
         activateFactions();
+        button.gameObject.SetActive(false);
         StartCoroutine(showText(fullText, topText));
         trackingStatus = "TRACKED";
         StatusChanger();
@@ -33,7 +37,7 @@ public class factionHandler : MonoBehaviour
         switch (GroupID)
         {
             case 1:
-                groupName = "RA";
+                groupName = "Horus";
                 item1.SetActive(true);
                 item2.SetActive(false);
                 item3.SetActive(false);
@@ -115,7 +119,13 @@ public class factionHandler : MonoBehaviour
             loadingText.gameObject.SetActive(false);
             groupText.text = groupName;
             groupText.gameObject.SetActive(true);
+            button.gameObject.SetActive(true);
         }
+    }
+
+    public void proceedNext()
+    {
+        SceneManager.LoadScene("InfoPart");
     }
 
 }
