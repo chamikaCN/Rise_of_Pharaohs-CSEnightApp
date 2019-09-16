@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using Vuforia;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Assets.Scripts;
 
 public class factionHandler : MonoBehaviour
 {
     int GroupID;
-    public GameObject item1, item2, item3, item4, button;
+    God myGod;
+    public GameObject HorusModel, BastetModel, OsirisModel, AnubisModel, button;
     public Text topText, loadingText;
     public TextMeshProUGUI groupText;
     string fullText, loadingfullText, trackingStatus, imageTargetname, groupName;
@@ -20,6 +22,9 @@ public class factionHandler : MonoBehaviour
         loadingfullText = " 0 0 0 0 0 0";
         imageTargetname = "ImageTarget";
         GroupID = PlayerPrefs.GetInt("Group ID");
+        GodManager.createGods();
+        myGod = GodManager.getGodInfo(GroupID);
+        allDeactive();
         activateFactions();
         button.gameObject.SetActive(false);
         StartCoroutine(showText(fullText, topText));
@@ -32,37 +37,29 @@ public class factionHandler : MonoBehaviour
         StatusChanger();
     }
 
+    void allDeactive()
+    {
+        HorusModel.SetActive(false);
+        BastetModel.SetActive(false);
+        OsirisModel.SetActive(false);
+        AnubisModel.SetActive(false);
+    }
+
     void activateFactions()
     {
         switch (GroupID)
         {
             case 1:
-                groupName = "Horus";
-                item1.SetActive(true);
-                item2.SetActive(false);
-                item3.SetActive(false);
-                item4.SetActive(false);
+                HorusModel.SetActive(true);
                 break;
             case 2:
-                groupName = "BASTET";
-                item1.SetActive(false);
-                item2.SetActive(true);
-                item3.SetActive(false);
-                item4.SetActive(false);
+                BastetModel.SetActive(true);
                 break;
             case 3:
-                groupName = "OSIRIS";
-                item1.SetActive(false);
-                item2.SetActive(false);
-                item3.SetActive(true);
-                item4.SetActive(false);
+                OsirisModel.SetActive(true);
                 break;
             case 4:
-                groupName = "ANUBIS";
-                item1.SetActive(false);
-                item2.SetActive(false);
-                item3.SetActive(false);
-                item4.SetActive(true);
+                AnubisModel.SetActive(true);
                 break;
         }
     }
@@ -117,7 +114,7 @@ public class factionHandler : MonoBehaviour
         else
         {
             loadingText.gameObject.SetActive(false);
-            groupText.text = groupName;
+            groupText.text = myGod.GodName.ToUpper();
             groupText.gameObject.SetActive(true);
             button.gameObject.SetActive(true);
         }

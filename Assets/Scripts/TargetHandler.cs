@@ -61,6 +61,10 @@ public class TargetHandler : MonoBehaviour
         if (artifacts < 5)
         {
             texts[artifacts].SetActive(true);
+            if(artifacts == 3)
+            {
+                texts[artifacts].GetComponent<Text>().text = PlayerPrefs.GetString("IndexNo");
+            }
         }
         artifacts += 1;
         artifactText.text = "ARTIFACTS   " + artifacts;

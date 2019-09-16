@@ -3,21 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Assets.Scripts;
+using TMPro;
 
 public class IndexHandler : MonoBehaviour
 {
     public InputField indexInput;
     public Button submitButton;
-    public GameObject revealPanel,factionButton, infoButton;
+    public GameObject revealPanel,factionPanel,factionButton, infoButton;
+    public TextMeshProUGUI facName, facDes;
     public Text messagetext, infotext;
     public int primeDivider;
-    int indexNumber;
-    int groupID;
-
+    public Sprite Anubis, Osiris, Bastet, Horus;
+    Sprite godSprite;
+    public Image godsprite;
+    string indexNumber;
+    int GroupID;
+    God myGod;
+ 
     private void Start()
     {
         //PlayerPrefs.SetInt("Initial", 0);
+        GroupID = PlayerPrefs.GetInt("Group ID");
+        GodManager.createGods();
+        myGod = GodManager.getGodInfo(GroupID);
         revealPanel.SetActive(false);
+        factionPanel.SetActive(false);
+        
         if (PlayerPrefs.GetInt("Initial") == 0)
         {
             factionButton.SetActive(false);
@@ -27,6 +39,21 @@ public class IndexHandler : MonoBehaviour
         {
             factionButton.SetActive(true);
             infoButton.SetActive(true);
+            switch(GroupID)
+            {
+                case 1:
+                    godSprite = Horus;
+                    break;
+                case 2:
+                    godSprite = Bastet;
+                    break;
+                case 3:
+                    godSprite = Osiris;
+                    break;
+                case 4:
+                    godSprite = Anubis;
+                    break;
+            }
         }
     }
     
@@ -39,15 +66,10 @@ public class IndexHandler : MonoBehaviour
         }
     }
 
-    public void loadFaction()
-    {
-        SceneManager.LoadScene("ChoosingPart");
-    }
-
     public void openPanel()
     {
         revealPanel.SetActive(true);
-        infotext.text = "on 29th october\n@ night\nin the " + PlayerPrefs.GetString("Gatherplace");
+        infotext.text = "on 29th october\n@ night\nin the " + myGod.GodVenue;
     }
 
     public void closePanel()
@@ -55,22 +77,37 @@ public class IndexHandler : MonoBehaviour
         revealPanel.SetActive(false);
     }
 
+    public void openfacPanel()
+    {
+        factionPanel.SetActive(true);
+        facName.text = myGod.GodName.ToUpper();
+        facDes.text = myGod.GodDescription;
+        godsprite.sprite = godSprite;
+    }
+
+    public void closefacPanel()
+    {
+        factionPanel.SetActive(false);
+    }
 
 
     public void Submit()
     {
-        primeDivider = 13;
+        primeDivider = 99929;
         string indexer = indexInput.text;
 
-        if(indexer.Length == 6)
+        if(indexer.Length == 15)
         {
-            //string processedindexer = indexer.Substring(0, 10);
-            indexNumber = int.Parse(indexer);
-            calculateGroup(indexNumber);
-            if (groupID == 1 | groupID == 2 | groupID == 3 | groupID == 4)
+            string groupidentification = indexer.Substring(0, 9);
+            string indexidentification = indexer.Substring(9, 6);
+            calculateGroup(int.Parse(groupidentification));
+            calculateIndex(indexidentification);
+            Debug.Log(indexNumber);
+            if (GroupID == 1 | GroupID == 2 | GroupID == 3 | GroupID == 4)
             {
-                PlayerPrefs.SetInt("Group ID", groupID);
+                PlayerPrefs.SetInt("Group ID", GroupID);
                 PlayerPrefs.SetInt("Initial", 1);
+                PlayerPrefs.SetString("IndexNo", indexNumber);
                 SceneManager.LoadScene("ARpart");
             }
             else
@@ -81,7 +118,7 @@ public class IndexHandler : MonoBehaviour
         }
         else
         {
-            messagetext.text = "index should include 6 digits";
+            messagetext.text = "index should include 15 digits";
             StartCoroutine(textClearer());
         }
     }
@@ -90,23 +127,39 @@ public class IndexHandler : MonoBehaviour
     {
         switch (index % primeDivider)
         {
-            case 2:
-                groupID = 1;
-                Debug.Log("you are in team 1");
+            case 11045:
+                GroupID = 1;
                 break;
-            case 5:
-                groupID = 2;
-                Debug.Log("you are in team 2");
+            case 47219:
+                GroupID = 2;
                 break;
-            case 8:
-                groupID = 3;
-                Debug.Log("you are in team 3");
+            case 30581:
+                GroupID = 3;
                 break;
-            case 11:
-                groupID = 4;
-                Debug.Log("you are in team 4");
+            case 68385:
+                GroupID = 4;
                 break;
         }
+        
+    }
+
+    void calculateIndex(string indexString)
+    {
+        string lastnumbers = "";
+        for(int i = 0; i < 5; i = i + 2)
+        {
+            int num = int.Parse(indexString[i].ToString());
+            if (num == 0)
+            {
+                lastnumbers += "9";
+            }
+            else
+            {
+                lastnumbers += (num - 1);
+            }
+        }
+
+        indexNumber = "180" + lastnumbers;
         
     }
 
