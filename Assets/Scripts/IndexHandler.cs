@@ -10,20 +10,23 @@ public class IndexHandler : MonoBehaviour
 {
     public InputField indexInput;
     public Button submitButton;
-    public GameObject revealPanel,factionPanel,factionButton, infoButton;
-    public TextMeshProUGUI facName, facDes;
+    public GameObject revealPanel,factionPanel,factionButton, infoButton, welcomePanel;
+    public TextMeshProUGUI facName, facDes, welcomeText;
     public Text messagetext, infotext;
     public int primeDivider;
     public Sprite Anubis, Osiris, Bastet, Horus;
     Sprite godSprite;
     public Image godsprite;
-    string indexNumber;
+    string indexNumber, welcomePhrase;
     int GroupID;
     God myGod;
  
     private void Start()
     {
         //PlayerPrefs.SetInt("Initial", 0);
+        welcomePanel.SetActive(true);
+        welcomePhrase = "when the sun sets over the nile, mummies start to roam the land of the pyramids \n.......";
+        StartCoroutine(showText(welcomePhrase,welcomeText));
         GroupID = PlayerPrefs.GetInt("Group ID");
         GodManager.createGods();
         myGod = GodManager.getGodInfo(GroupID);
@@ -69,7 +72,7 @@ public class IndexHandler : MonoBehaviour
     public void openPanel()
     {
         revealPanel.SetActive(true);
-        infotext.text = "on 29th october\n@ night\nin the " + myGod.GodVenue;
+        infotext.text = "on 29th october\n@ night\nin the " + "qwert" + myGod.GodVenue;
     }
 
     public void closePanel()
@@ -169,5 +172,20 @@ public class IndexHandler : MonoBehaviour
         messagetext.text = "";
     }
 
-    
+    IEnumerator welcomePanelDisable()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        welcomePanel.SetActive(false);
+    }
+
+    IEnumerator showText(string text, TextMeshProUGUI positionText)
+    {
+        for (int k = 0; k < text.Length; k++)
+        {
+            positionText.text = text.Substring(0, k + 1);
+            yield return new WaitForSeconds(0.2f);
+        }
+        StartCoroutine(welcomePanelDisable());
+    }
+
 }

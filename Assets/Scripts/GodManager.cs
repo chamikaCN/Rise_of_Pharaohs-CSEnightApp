@@ -10,7 +10,6 @@ namespace Assets.Scripts
     static class GodManager 
     {
         static God[] GodList;
-
         public static void createGods()
         {
             GodList = new God[4];
