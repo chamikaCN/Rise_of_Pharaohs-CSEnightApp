@@ -14,7 +14,8 @@ public class TargetHandler : MonoBehaviour
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI welcomeText;
     string welcomePhrase,startString,finalString;
-    int[] integerSet;
+    //int[] integerSet;
+    //ArrayList intSet;
 
     void Start()
     {
@@ -28,7 +29,10 @@ public class TargetHandler : MonoBehaviour
         startString = "____ __ ________";
         finalString = "RISE OF PHARAOHS";
         NameText.text = startString;
-        integerSet = new int[13];
+        //integerSet = new int[13];
+        //intSet = new ArrayList();
+        //AssignInts();
+        //Debug.Log(intSet.ToString());
     }
 
     void Update()
@@ -47,9 +51,9 @@ public class TargetHandler : MonoBehaviour
             }
         }
 
-        if (artifacts >= 9)
+        if (artifacts >= 8)
         {
-            progressPanel.SetActive(true);
+            StartCoroutine(progressPanelEnable());
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -60,18 +64,27 @@ public class TargetHandler : MonoBehaviour
 
     public void collectArtifact()
     {
-        letterReveal();
-        letterReveal();
+        letterReveal(2*artifacts);
+        letterReveal((2*artifacts)+1);
         artifacts += 1;
         artifactText.text = "ARTIFACTS   " + artifacts;
     }
 
-    void letterReveal(){
-        int rand = newRandomInt();
+    void letterReveal(int interger){
+        //int rand = newRandomInt();
         StringBuilder sb = new StringBuilder(startString);
-        sb[rand] = finalString[rand];
+        sb[interger] = finalString[interger];
         startString = sb.ToString();
         NameText.text = startString;
+    }
+
+    /*void AssignInts(){
+        while(intSet.Count == 13){
+            int randomInt = Mathf.RoundToInt(Random.Range(-0.45f, 12.45f));
+            if(!(intSet.Contains(randomInt))){
+                intSet.Add(randomInt);
+            }
+        }
     }
 
     int newRandomInt()
@@ -83,7 +96,7 @@ public class TargetHandler : MonoBehaviour
         integerSet[randomInt] = randomInt;
         Debug.Log("now " + randomInt);
         return randomInt;
-    }
+    }*/
 
     public void progressFaction()
     {
@@ -94,6 +107,12 @@ public class TargetHandler : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(3f);
         welcomePanel.SetActive(false);
+    }
+
+    IEnumerator progressPanelEnable()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        progressPanel.SetActive(true);
     }
 
     IEnumerator showText(string text, TextMeshProUGUI positionText)

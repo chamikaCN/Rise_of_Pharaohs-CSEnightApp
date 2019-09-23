@@ -6516,9 +6516,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artifactText: {fileID: 704185609}
   progressPanel: {fileID: 1116438170}
-  welcomePanel: {fileID: 0}
-  NameText: {fileID: 0}
-  welcomeText: {fileID: 0}
+  welcomePanel: {fileID: 1080560313}
+  NameText: {fileID: 1471544895}
+  welcomeText: {fileID: 1618180224}
 --- !u!1001 &1922165497
 PrefabInstance:
   m_ObjectHideFlags: 0

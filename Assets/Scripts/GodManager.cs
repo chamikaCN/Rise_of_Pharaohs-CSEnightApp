@@ -22,7 +22,7 @@ namespace Assets.Scripts
             Horus.GodPronoun2 = "him";
             Horus.GodTitle = "protector of egypt";
             Horus.GodVenue = "horusplace";
-            Horus.GodDescription = "Horus is the greatest god jh dfba asgare va \n fvabr asgaerb ager arbrer\n abaer aerbetb verger";
+            Horus.GodDescription = "Horus was the god of the sky and also the God of war. The pharaoh ruling at any given time of Egypt was always the living image of Horus";
             GodList[0] = Horus;
 
             //BASTET
@@ -33,7 +33,7 @@ namespace Assets.Scripts
             Bastet.GodPronoun2 = "her";
             Bastet.GodTitle = "protector of people";
             Bastet.GodVenue = "Bastetplace";
-            Bastet.GodDescription = "Bastet is the greatest god jh dfba asgare va \n fvabr asgaerb ager arbrer\n abaer aerbetb verger";
+            Bastet.GodDescription = "Bast is the goddess of protection and blessing,and was the protectress of women, children, and domestic cats";
             GodList[1] = Bastet;
 
             //OSIRIS
@@ -44,7 +44,7 @@ namespace Assets.Scripts
             Osiris.GodPronoun2 = "him";
             Osiris.GodTitle = "lord of the underworld";
             Osiris.GodVenue = "osirisplace";
-            Osiris.GodDescription = "Osiris is the greatest god jh dfba asgare va \n fvabr asgaerb ager arbrer\n abaer aerbetb verger";
+            Osiris.GodDescription = "Osiris is the Egyptian Lord of the Underworld and Judge of the Dead, brother - husband to Isis, and one of the most important gods of ancient Egypt.";
             GodList[2] = Osiris;
 
             //ANUBIS
@@ -55,7 +55,7 @@ namespace Assets.Scripts
             Anubis.GodPronoun2 = "him";
             Anubis.GodTitle = "god of death";
             Anubis.GodVenue = "anubisplace";
-            Anubis.GodDescription = "Anubis is the greatest god jh dfba asgare va \n fvabr asgaerb ager arbrer\n abaer aerbetb verger";
+            Anubis.GodDescription = "Anubis, as the god of death and the afterlife, was closely associated with mummification and burial rites.";
             GodList[3] = Anubis;
         }
 

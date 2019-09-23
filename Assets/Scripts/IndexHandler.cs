@@ -72,7 +72,7 @@ public class IndexHandler : MonoBehaviour
     public void openPanel()
     {
         revealPanel.SetActive(true);
-        infotext.text = "on 29th october\n@ night\nin the " + "qwert" + myGod.GodVenue;
+        infotext.text = "on 29th october\n@ night\nin the " + myGod.GodVenue;
     }
 
     public void closePanel()

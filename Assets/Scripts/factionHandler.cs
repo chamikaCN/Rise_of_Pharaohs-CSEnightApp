@@ -12,14 +12,13 @@ public class factionHandler : MonoBehaviour
     int GroupID;
     God myGod;
     public GameObject HorusModel, BastetModel, OsirisModel, AnubisModel, button;
-    public Text topText, loadingText;
-    public TextMeshProUGUI groupText;
+    public TextMeshProUGUI groupText, topText, loadingText;
     string fullText, loadingfullText, trackingStatus, imageTargetname, groupName;
 
     void Start()
     {
         fullText = "you belong to the followers of";
-        loadingfullText = " 0 0 0 0 0 0";
+        loadingfullText = " 0 0 0 0 0";
         imageTargetname = "ImageTarget";
         GroupID = PlayerPrefs.GetInt("Group ID");
         GodManager.createGods();
@@ -64,7 +63,7 @@ public class factionHandler : MonoBehaviour
         }
     }
 
-    IEnumerator showText(string text, Text positionText)
+    IEnumerator showText(string text, TextMeshProUGUI positionText)
     {
         for (int k = 0; k < text.Length; k++)
         {
