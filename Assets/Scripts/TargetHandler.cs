@@ -25,8 +25,8 @@ public class TargetHandler : MonoBehaviour
         artifacts = 0;
         artifactText.text = "ARTIFACTS   0";
         progressPanel.SetActive(false);
-        startString = "___ _________";
-        finalString = "THE AWAKENING";
+        startString = "____ __ ________";
+        finalString = "RISE OF PHARAOHS";
         NameText.text = startString;
         integerSet = new int[13];
     }
@@ -47,7 +47,7 @@ public class TargetHandler : MonoBehaviour
             }
         }
 
-        if (artifacts >= 7)
+        if (artifacts >= 9)
         {
             progressPanel.SetActive(true);
         }
@@ -80,6 +80,8 @@ public class TargetHandler : MonoBehaviour
         while(System.Array.IndexOf(integerSet,randomInt) >= 0 ){
             randomInt = Mathf.RoundToInt(Random.Range(-0.45f, 12.45f));
         }
+        integerSet[randomInt] = randomInt;
+        Debug.Log("now " + randomInt);
         return randomInt;
     }
 
