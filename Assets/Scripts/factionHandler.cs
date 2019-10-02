@@ -11,18 +11,27 @@ public class factionHandler : MonoBehaviour
 {
     int GroupID;
     God myGod;
-    public GameObject HorusModel, BastetModel, OsirisModel, AnubisModel, button;
+    public GameObject HorusModel, BastetModel, OsirisModel, AnubisModel, button, IndexObject;
     public TextMeshProUGUI groupText, topText, loadingText;
     string fullText, loadingfullText, trackingStatus, imageTargetname, groupName;
+    public AudioClip egypt1, egypt2;
+    AudioSource source;
 
     void Start()
     {
+        source = this.GetComponent<AudioSource>();
+        source.clip = egypt1;
+        source.Play();
         fullText = "you belong to the followers of";
         loadingfullText = " 0 0 0 0 0";
         imageTargetname = "ImageTarget";
-        GroupID = PlayerPrefs.GetInt("Group ID");
-        GodManager.createGods();
-        myGod = GodManager.getGodInfo(GroupID);
+        GroupID = GameManager.getGroupID();
+        if (GroupID > 0)
+        {
+            myGod = GameManager.getGodInfo(GroupID);
+        }
+        IndexObject.SetActive(true);
+        IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = "Chamika Nandasiri\n" + GameManager.getIndexNo();
         allDeactive();
         activateFactions();
         button.gameObject.SetActive(false);
@@ -34,6 +43,10 @@ public class factionHandler : MonoBehaviour
     void Update()
     {
         StatusChanger();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("IndexPart");
+        }
     }
 
     void allDeactive()
@@ -108,11 +121,15 @@ public class factionHandler : MonoBehaviour
         {
             loadingText.gameObject.SetActive(true);
             groupText.gameObject.SetActive(false);
+            source.clip = egypt1;
+            source.Play();
             StartCoroutine(showLoader());
         }
         else
         {
             loadingText.gameObject.SetActive(false);
+            source.clip = egypt2;
+            source.Play();
             groupText.text = myGod.GodName.ToUpper();
             groupText.gameObject.SetActive(true);
             button.gameObject.SetActive(true);

@@ -5,34 +5,35 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Text;
+using Assets.Scripts;
 
 public class TargetHandler : MonoBehaviour
 {
     int GroupID,artifacts;
     public Text artifactText;
-    public GameObject progressPanel, welcomePanel;
+    public GameObject progressPanel, welcomePanel,IndexObject;
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI welcomeText;
     string welcomePhrase,startString,finalString;
+    AudioSource typing,Egypt,letter,vanish;
     //int[] integerSet;
     //ArrayList intSet;
 
     void Start()
     {
+        audioSetup();
         welcomePanel.SetActive(true);
-        welcomePhrase = "when the stars begin to shine, pharaohs rise from the underworld\n....... ";
+        welcomePhrase = "when the stars begin to shine, pharaohs breathe from the underworld\n....... ";
         StartCoroutine(showText(welcomePhrase,welcomeText));
-        GroupID = PlayerPrefs.GetInt("Group ID");
+        GroupID = GameManager.getGroupID();
         artifacts = 0;
         artifactText.text = "ARTIFACTS   0";
         progressPanel.SetActive(false);
-        startString = "____ __ ________";
-        finalString = "RISE OF PHARAOHS";
+        startString = "______";
+        finalString = "EXODUS";
         NameText.text = startString;
-        //integerSet = new int[13];
-        //intSet = new ArrayList();
-        //AssignInts();
-        //Debug.Log(intSet.ToString());
+        IndexObject.SetActive(true);
+        IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = "Chamika Nandasiri\n" + GameManager.getIndexNo();
     }
 
     void Update()
@@ -46,13 +47,17 @@ public class TargetHandler : MonoBehaviour
                 if(hit.collider.name == "Pharaoh")
                 {
                     Destroy(hit.collider.gameObject);
+                    letter.Play();
                     collectArtifact();
                 }
             }
         }
 
-        if (artifacts >= 8)
+        if (artifacts >= 6)
         {
+            NameText.gameObject.transform.Translate(0f, 0f, 0f);
+            NameText.gameObject.transform.localScale.Scale(new Vector3(0.5f, 0.5f));
+            StartCoroutine(clearText(NameText));
             StartCoroutine(progressPanelEnable());
         }
 
@@ -62,10 +67,17 @@ public class TargetHandler : MonoBehaviour
         }
     }
 
+    void audioSetup()
+    {
+        typing = welcomePanel.GetComponent<AudioSource>();
+        Egypt = this.GetComponent<AudioSource>();
+        letter = NameText.GetComponent<AudioSource>();
+        vanish = artifactText.GetComponent<AudioSource>();
+    }
+
     public void collectArtifact()
     {
-        letterReveal(2*artifacts);
-        letterReveal((2*artifacts)+1);
+        letterReveal(artifacts);
         artifacts += 1;
         artifactText.text = "ARTIFACTS   " + artifacts;
     }
@@ -107,21 +119,39 @@ public class TargetHandler : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(3f);
         welcomePanel.SetActive(false);
+        Egypt.Play();
     }
 
     IEnumerator progressPanelEnable()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(5f);
         progressPanel.SetActive(true);
     }
 
     IEnumerator showText(string text, TextMeshProUGUI positionText)
     {
+        typing.Play();
         for (int k = 0; k < text.Length; k++)
         {
             positionText.text = text.Substring(0, k + 1);
             yield return new WaitForSeconds(0.2f);
         }
+        typing.Stop();
         StartCoroutine(welcomePanelDisable());
+    }
+
+    IEnumerator clearText(TextMeshProUGUI positionText)
+    {
+        vanish.Play();
+        string text = positionText.text;
+        for (int k = 0; k < text.Length; k++)
+        {
+            StringBuilder sb = new StringBuilder(text);
+            sb[k] = ' ';
+            text = sb.ToString();
+            positionText.text = text;
+            yield return new WaitForSeconds(0.35f);
+        }
+        vanish.Stop();
     }
 }

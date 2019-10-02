@@ -10,39 +10,57 @@ public class IndexHandler : MonoBehaviour
 {
     public InputField indexInput;
     public Button submitButton;
-    public GameObject revealPanel,factionPanel,factionButton, infoButton, welcomePanel;
+    public GameObject revealPanel,factionPanel,factionButton, infoButton, welcomePanel,IndexObject;
     public TextMeshProUGUI facName, facDes, welcomeText;
-    public Text messagetext, infotext;
+    public TextMeshProUGUI infotext;
+    public Text messagetext;
     public int primeDivider;
     public Sprite Anubis, Osiris, Bastet, Horus;
     Sprite godSprite;
     public Image godsprite;
     string indexNumber, welcomePhrase;
+    AudioSource typing,Egypt;
     int GroupID;
     God myGod;
  
     private void Start()
     {
-        //PlayerPrefs.SetInt("Initial", 0);
-        welcomePanel.SetActive(true);
+        GameManager.sendTesting();
         welcomePhrase = "when the sun sets over the nile, mummies start to roam the land of the pyramids \n.......";
-        StartCoroutine(showText(welcomePhrase,welcomeText));
-        GroupID = PlayerPrefs.GetInt("Group ID");
-        GodManager.createGods();
-        myGod = GodManager.getGodInfo(GroupID);
+        Egypt = this.GetComponent<AudioSource>();
+        if (!GameManager.getIsCompleted())
+        {
+            GameManager.ReceiveSavedData();
+            welcomePanel.SetActive(true);
+            typing = welcomePanel.GetComponent<AudioSource>();
+            StartCoroutine(showText(welcomePhrase, welcomeText, typing));
+        }
+        else
+        {
+            Egypt.Play();
+        }
+        GroupID = GameManager.getGroupID();
+        GameManager.createGods();
+        if (GroupID > 0)
+        {
+            myGod = GameManager.getGodInfo(GroupID);
+        }
         revealPanel.SetActive(false);
         factionPanel.SetActive(false);
         
-        if (PlayerPrefs.GetInt("Initial") == 0)
+        if (GameManager.getInitial() == 0)
         {
             factionButton.SetActive(false);
             infoButton.SetActive(false);
+            IndexObject.SetActive(false);
         }
         else
         {
             factionButton.SetActive(true);
             infoButton.SetActive(true);
-            switch(GroupID)
+            IndexObject.SetActive(true);
+            IndexObject.GetComponentInChildren<TextMeshProUGUI>() .text = "Chamika Nandasiri\n" + GameManager.getIndexNo();
+            switch (GroupID)
             {
                 case 1:
                     godSprite = Horus;
@@ -105,12 +123,12 @@ public class IndexHandler : MonoBehaviour
             string indexidentification = indexer.Substring(9, 6);
             calculateGroup(int.Parse(groupidentification));
             calculateIndex(indexidentification);
-            Debug.Log(indexNumber);
+
             if (GroupID == 1 | GroupID == 2 | GroupID == 3 | GroupID == 4)
             {
-                PlayerPrefs.SetInt("Group ID", GroupID);
-                PlayerPrefs.SetInt("Initial", 1);
-                PlayerPrefs.SetString("IndexNo", indexNumber);
+                GameManager.setGroupID(GroupID);
+                GameManager.setIndexNo(indexNumber);
+                GameManager.setComplete();
                 SceneManager.LoadScene("ARpart");
             }
             else
@@ -141,6 +159,9 @@ public class IndexHandler : MonoBehaviour
                 break;
             case 68385:
                 GroupID = 4;
+                break;
+            default:
+                GroupID = 0;
                 break;
         }
         
@@ -176,16 +197,19 @@ public class IndexHandler : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(3f);
         welcomePanel.SetActive(false);
+        
+        Egypt.Play();
     }
 
-    IEnumerator showText(string text, TextMeshProUGUI positionText)
+    IEnumerator showText(string text, TextMeshProUGUI positionText, AudioSource sound)
     {
+        sound.Play();
         for (int k = 0; k < text.Length; k++)
         {
             positionText.text = text.Substring(0, k + 1);
             yield return new WaitForSeconds(0.2f);
         }
+        sound.Stop();
         StartCoroutine(welcomePanelDisable());
     }
-
 }

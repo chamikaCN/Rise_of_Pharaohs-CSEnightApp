@@ -21,11 +21,21 @@ public class infoSelector : MonoBehaviour
     private void Start()
     {
         //PlayerPrefs.SetInt("Group ID", Mathf.RoundToInt(Random.Range(1.0f, 4.0f)));
-        GroupID = PlayerPrefs.GetInt("Group ID");
-        GodManager.createGods();
-        myGod = GodManager.getGodInfo(GroupID);
+        GroupID = GameManager.getGroupID();
+        if (GroupID > 0)
+        {
+            myGod = GameManager.getGodInfo(GroupID);
+        }
         SetSprite();
         SetInfo();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("IndexPart");
+        }
     }
 
     private void SetSprite()
@@ -58,7 +68,6 @@ public class infoSelector : MonoBehaviour
         godParagraph2.text = myGod.GodName + " wants " + myGod.GodPronoun2 + " to be chosen as the new patreon " + myGod.GodPronoun1 + " of the new empire.it is your " +
             "responsibility to make " + myGod.GodPronoun2 + " proud or suffer the wrath of a " + myGod.GodPronoun1;
         venueText.text = "on 29th october\n@ night\nin the " + myGod.GodVenue;
-        //PlayerPrefs.SetString("Gatherplace", place);
     }
 
     public void openPanel()
@@ -73,6 +82,7 @@ public class infoSelector : MonoBehaviour
 
     public void returnLoad()
     {
+        GameManager.SaveData();
         SceneManager.LoadScene("IndexPart");
     }
 }
