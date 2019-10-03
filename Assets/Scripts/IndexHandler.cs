@@ -59,7 +59,7 @@ public class IndexHandler : MonoBehaviour
             factionButton.SetActive(true);
             infoButton.SetActive(true);
             IndexObject.SetActive(true);
-            IndexObject.GetComponentInChildren<TextMeshProUGUI>() .text = "Chamika Nandasiri\n" + GameManager.getIndexNo();
+            IndexObject.GetComponentInChildren<TextMeshProUGUI>() .text = GameManager.getName(int.Parse(GameManager.getIndexNo())) + "\n" + GameManager.getIndexNo();
             switch (GroupID)
             {
                 case 1:

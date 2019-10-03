@@ -31,7 +31,7 @@ public class factionHandler : MonoBehaviour
             myGod = GameManager.getGodInfo(GroupID);
         }
         IndexObject.SetActive(true);
-        IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = "Chamika Nandasiri\n" + GameManager.getIndexNo();
+        IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.getName(int.Parse(GameManager.getIndexNo())) + "\n" + GameManager.getIndexNo();
         allDeactive();
         activateFactions();
         button.gameObject.SetActive(false);

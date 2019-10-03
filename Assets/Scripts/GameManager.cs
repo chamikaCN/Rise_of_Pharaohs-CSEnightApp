@@ -15,6 +15,7 @@ namespace Assets.Scripts
         static bool completed = false;
         static int initial = 0;
         static notificationManager NM = new notificationManager();
+        static NameManager NameM = new NameManager();
 
         public static void createGods()
         {
@@ -78,6 +79,8 @@ namespace Assets.Scripts
                 Debug.Log("firsttime");
                 NM.sendWelcomeNotification();
             }
+            NameM = new NameManager();
+            NameM.addItems();
             GroupID = PlayerPrefs.GetInt("Group ID");
             IndexNo = PlayerPrefs.GetString("IndexNo");
             completed = false;
@@ -93,6 +96,11 @@ namespace Assets.Scripts
             }
             PlayerPrefs.SetInt("Group ID", GroupID);
             PlayerPrefs.SetString("IndexNo", IndexNo);
+        }
+
+        public static string getName(int index)
+        {
+            return NameM.getName(index);
         }
 
         public static int getGroupID()

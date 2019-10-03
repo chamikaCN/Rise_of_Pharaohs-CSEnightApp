@@ -33,7 +33,7 @@ public class TargetHandler : MonoBehaviour
         finalString = "EXODUS";
         NameText.text = startString;
         IndexObject.SetActive(true);
-        IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = "Chamika Nandasiri\n" + GameManager.getIndexNo();
+        IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.getName(int.Parse(GameManager.getIndexNo())) + "\n" + GameManager.getIndexNo();
     }
 
     void Update()
