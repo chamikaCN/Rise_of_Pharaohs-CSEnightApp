@@ -103,6 +103,11 @@ namespace Assets.Scripts
             return NameM.getName(index);
         }
 
+        public static char getGender(int index)
+        {
+            return NameM.getGender(index);
+        }
+
         public static int getGroupID()
         {
             return GroupID;
@@ -136,6 +141,11 @@ namespace Assets.Scripts
         public static int getInitial()
         {
             return initial;
+        }
+
+        public static bool getNameAvailable(int index)
+        {
+            return NameM.isInNameReferance(index);
         }
 
         public static void sendTesting()

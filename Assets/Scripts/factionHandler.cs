@@ -16,6 +16,8 @@ public class factionHandler : MonoBehaviour
     string fullText, loadingfullText, trackingStatus, imageTargetname, groupName;
     public AudioClip egypt1, egypt2;
     AudioSource source;
+    public UnityEngine.UI.Image profPic;
+    public Sprite MaleProfPic,FemaleProfPic;
 
     void Start()
     {
@@ -32,6 +34,12 @@ public class factionHandler : MonoBehaviour
         }
         IndexObject.SetActive(true);
         IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.getName(int.Parse(GameManager.getIndexNo())) + "\n" + GameManager.getIndexNo();
+        if(GameManager.getGender(int.Parse(GameManager.getIndexNo())) == 'F')
+            {
+                profPic.sprite = FemaleProfPic;
+            }else{
+                profPic.sprite = MaleProfPic;
+            }
         allDeactive();
         activateFactions();
         button.gameObject.SetActive(false);

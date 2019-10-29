@@ -560,7 +560,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NIGHT OF PHARAOHS
+  m_Text: RiSE OF PHARAOHS
 --- !u!222 &568780200
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2239,7 +2239,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'on 29th october
+  m_Text: 'on 12th november
 
     @ night
 

@@ -16,6 +16,8 @@ public class TargetHandler : MonoBehaviour
     public TextMeshProUGUI welcomeText;
     string welcomePhrase,startString,finalString;
     AudioSource typing,Egypt,letter,vanish;
+    public UnityEngine.UI.Image profPic;
+    public Sprite MaleProfPic,FemaleProfPic;
     //int[] integerSet;
     //ArrayList intSet;
 
@@ -29,11 +31,17 @@ public class TargetHandler : MonoBehaviour
         artifacts = 0;
         artifactText.text = "ARTIFACTS   0";
         progressPanel.SetActive(false);
-        startString = "______";
-        finalString = "EXODUS";
+        startString = "_______\n________";
+        finalString = "RISE OF\nPHARAOHS";
         NameText.text = startString;
         IndexObject.SetActive(true);
         IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.getName(int.Parse(GameManager.getIndexNo())) + "\n" + GameManager.getIndexNo();
+        if(GameManager.getGender(int.Parse(GameManager.getIndexNo())) == 'F')
+            {
+                profPic.sprite = FemaleProfPic;
+            }else{
+                profPic.sprite = MaleProfPic;
+            }
     }
 
     void Update()
@@ -53,7 +61,7 @@ public class TargetHandler : MonoBehaviour
             }
         }
 
-        if (artifacts >= 6)
+        if (artifacts >= 12)
         {
             NameText.gameObject.transform.Translate(0f, 0f, 0f);
             NameText.gameObject.transform.localScale.Scale(new Vector3(0.5f, 0.5f));
@@ -78,7 +86,8 @@ public class TargetHandler : MonoBehaviour
     public void collectArtifact()
     {
         letterReveal(artifacts);
-        artifacts += 1;
+        letterReveal(artifacts+1);
+        artifacts += 2;
         artifactText.text = "ARTIFACTS   " + artifacts;
     }
 

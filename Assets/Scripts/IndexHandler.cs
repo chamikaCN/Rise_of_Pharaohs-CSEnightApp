@@ -10,14 +10,14 @@ public class IndexHandler : MonoBehaviour
 {
     public InputField indexInput;
     public Button submitButton;
-    public GameObject revealPanel,factionPanel,factionButton, infoButton, welcomePanel,IndexObject;
+    public GameObject revealPanel,factionPanel,factionButton, infoButton, welcomePanel, nextPanel,IndexObject;
     public TextMeshProUGUI facName, facDes, welcomeText;
-    public TextMeshProUGUI infotext;
+    public TextMeshProUGUI infotext,nameText;
     public Text messagetext;
     public int primeDivider;
-    public Sprite Anubis, Osiris, Bastet, Horus;
+    public Sprite Anubis, Osiris, Bastet, Horus, MaleProfPic, FemaleProfPic;
     Sprite godSprite;
-    public Image godsprite;
+    public Image godsprite, profPic;
     string indexNumber, welcomePhrase;
     AudioSource typing,Egypt;
     int GroupID;
@@ -47,6 +47,7 @@ public class IndexHandler : MonoBehaviour
         }
         revealPanel.SetActive(false);
         factionPanel.SetActive(false);
+        nextPanel.SetActive(false);
         
         if (GameManager.getInitial() == 0)
         {
@@ -60,6 +61,12 @@ public class IndexHandler : MonoBehaviour
             infoButton.SetActive(true);
             IndexObject.SetActive(true);
             IndexObject.GetComponentInChildren<TextMeshProUGUI>() .text = GameManager.getName(int.Parse(GameManager.getIndexNo())) + "\n" + GameManager.getIndexNo();
+            if(GameManager.getGender(int.Parse(GameManager.getIndexNo())) == 'F')
+            {
+                profPic.sprite = FemaleProfPic;
+            }else{
+                profPic.sprite = MaleProfPic;
+            }
             switch (GroupID)
             {
                 case 1:
@@ -124,12 +131,12 @@ public class IndexHandler : MonoBehaviour
             calculateGroup(int.Parse(groupidentification));
             calculateIndex(indexidentification);
 
-            if (GroupID == 1 | GroupID == 2 | GroupID == 3 | GroupID == 4)
+            if ((GroupID == 1 | GroupID == 2 | GroupID == 3 | GroupID == 4)&&(GameManager.getNameAvailable(int.Parse(indexNumber))))
             {
                 GameManager.setGroupID(GroupID);
                 GameManager.setIndexNo(indexNumber);
-                GameManager.setComplete();
-                SceneManager.LoadScene("ARpart");
+                nameText.text = GameManager.getName(int.Parse(GameManager.getIndexNo()));
+                nextPanel.SetActive(true);
             }
             else
             {
@@ -165,6 +172,16 @@ public class IndexHandler : MonoBehaviour
                 break;
         }
         
+    }
+
+    public void proceed(){
+        
+        GameManager.setComplete();
+        SceneManager.LoadScene("ARpart");
+    }
+
+    public void closeNextPanel(){
+        nextPanel.SetActive(false);
     }
 
     void calculateIndex(string indexString)
