@@ -12,14 +12,13 @@ public class TargetHandler : MonoBehaviour
     int GroupID,artifacts;
     public Text artifactText;
     public GameObject progressPanel, welcomePanel,IndexObject;
-    public TextMeshProUGUI NameText;
+    public TextMeshProUGUI NameText1, NameText2;
     public TextMeshProUGUI welcomeText;
-    string welcomePhrase,startString,finalString;
+    string welcomePhrase,startString,finalString,startStringUp,finalStringUp;
     AudioSource typing,Egypt,letter,vanish;
     public UnityEngine.UI.Image profPic;
     public Sprite MaleProfPic,FemaleProfPic;
-    //int[] integerSet;
-    //ArrayList intSet;
+    List<int> randomNumbers; 
 
     void Start()
     {
@@ -31,9 +30,12 @@ public class TargetHandler : MonoBehaviour
         artifacts = 0;
         artifactText.text = "ARTIFACTS   0";
         progressPanel.SetActive(false);
-        startString = "_______\n________";
-        finalString = "RISE OF\nPHARAOHS";
-        NameText.text = startString;
+        startStringUp = "____ __ ";
+        finalStringUp = "rise of ";
+        startString = "________";
+        finalString = "PHARAOHS";
+        NameText2.text = startString;
+        NameText1.text = startStringUp;
         IndexObject.SetActive(true);
         IndexObject.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.getName(int.Parse(GameManager.getIndexNo())) + "\n" + GameManager.getIndexNo();
         if(GameManager.getGender(int.Parse(GameManager.getIndexNo())) == 'F')
@@ -61,11 +63,14 @@ public class TargetHandler : MonoBehaviour
             }
         }
 
-        if (artifacts >= 12)
+        if (artifacts >= 8)
         {
-            NameText.gameObject.transform.Translate(0f, 0f, 0f);
-            NameText.gameObject.transform.localScale.Scale(new Vector3(0.5f, 0.5f));
-            StartCoroutine(clearText(NameText));
+            NameText2.gameObject.transform.Translate(0f, 0f, 0f);
+            NameText1.gameObject.transform.Translate(0f, 0f, 0f);
+            NameText2.gameObject.transform.localScale.Scale(new Vector3(0.5f, 0.5f));
+            NameText1.gameObject.transform.localScale.Scale(new Vector3(0.5f, 0.5f));
+            StartCoroutine(clearText(NameText2));
+            StartCoroutine(clearText(NameText1));
             StartCoroutine(progressPanelEnable());
         }
 
@@ -79,24 +84,40 @@ public class TargetHandler : MonoBehaviour
     {
         typing = welcomePanel.GetComponent<AudioSource>();
         Egypt = this.GetComponent<AudioSource>();
-        letter = NameText.GetComponent<AudioSource>();
+        letter = NameText2.GetComponent<AudioSource>();
         vanish = artifactText.GetComponent<AudioSource>();
     }
 
     public void collectArtifact()
     {
-        letterReveal(artifacts);
-        letterReveal(artifacts+1);
-        artifacts += 2;
+        letterReveal1(artifacts);
+        letterReveal2(artifacts);
+        artifacts += 1;
         artifactText.text = "ARTIFACTS   " + artifacts;
     }
 
-    void letterReveal(int interger){
+    void letterReveal(int interger,string start,string end, TextMeshProUGUI texty){
+        //int rand = newRandomInt();
+        StringBuilder sb = new StringBuilder(start);
+        sb[interger] = end[interger];
+        start = sb.ToString();
+        texty.text = start;
+    }
+
+    void letterReveal1(int interger){
+        //int rand = newRandomInt();
+        StringBuilder sb = new StringBuilder(startStringUp);
+        sb[interger] = finalStringUp[interger];
+        startStringUp = sb.ToString();
+        NameText1.text = startStringUp;
+    }
+
+    void letterReveal2(int interger){
         //int rand = newRandomInt();
         StringBuilder sb = new StringBuilder(startString);
         sb[interger] = finalString[interger];
         startString = sb.ToString();
-        NameText.text = startString;
+        NameText2.text = startString;
     }
 
     /*void AssignInts(){
