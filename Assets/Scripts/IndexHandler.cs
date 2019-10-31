@@ -155,16 +155,16 @@ public class IndexHandler : MonoBehaviour
     {
         switch (index % primeDivider)
         {
-            case 11045:
+            case 16561:
                 GroupID = 1;
                 break;
-            case 47219:
+            case 32183:
                 GroupID = 2;
                 break;
-            case 30581:
+            case 77611:
                 GroupID = 3;
                 break;
-            case 68385:
+            case 64577:
                 GroupID = 4;
                 break;
             default:
