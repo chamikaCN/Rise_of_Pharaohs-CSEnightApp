@@ -12,7 +12,7 @@ public class factionHandler : MonoBehaviour
     int GroupID;
     God myGod;
     public GameObject HorusModel, BastetModel, OsirisModel, AnubisModel, button, IndexObject;
-    public TextMeshProUGUI groupText, topText, loadingText;
+    public TextMeshProUGUI groupText, topText, loadingText, instructionText;
     string fullText, loadingfullText, trackingStatus, imageTargetname, groupName;
     public AudioClip egypt1, egypt2;
     AudioSource source;
@@ -128,6 +128,7 @@ public class factionHandler : MonoBehaviour
         if (trackingStatus == "NO_POSE")
         {
             loadingText.gameObject.SetActive(true);
+            instructionText.gameObject.SetActive(true);
             groupText.gameObject.SetActive(false);
             source.clip = egypt1;
             source.Play();
@@ -136,6 +137,7 @@ public class factionHandler : MonoBehaviour
         else
         {
             loadingText.gameObject.SetActive(false);
+            instructionText.gameObject.SetActive(false);
             source.clip = egypt2;
             source.Play();
             groupText.text = myGod.GodName.ToUpper();

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/IndexPart.unity
+    guid: 64cce4b18c664a746ba5fbabb1865af2
+  - enabled: 1
+    path: Assets/Scenes/ARpart.unity
+    guid: e58b726aa5aff564a8062053f6d98a58
+  - enabled: 1
+    path: Assets/Scenes/ChoosingPart.unity
+    guid: 7d57513be84e210498383d17a01d3574
+  - enabled: 1
+    path: Assets/Scenes/InfoPart.unity
+    guid: e92b75c3e5192fb41a9ad7ceb674476d
+  m_configObjects: {}
