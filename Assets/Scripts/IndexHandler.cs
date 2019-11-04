@@ -12,7 +12,8 @@ public class IndexHandler : MonoBehaviour
     public Button submitButton;
     public GameObject revealPanel,factionPanel,factionButton, infoButton, welcomePanel, nextPanel,IndexObject;
     public TextMeshProUGUI facName, facDes, welcomeText;
-    public TextMeshProUGUI infotext,nameText;
+    public TextMeshProUGUI nameText;
+    public Text infotext;
     public Text messagetext;
     public int primeDivider;
     public Sprite Anubis, Osiris, Bastet, Horus, MaleProfPic, FemaleProfPic;
@@ -97,7 +98,7 @@ public class IndexHandler : MonoBehaviour
     public void openPanel()
     {
         revealPanel.SetActive(true);
-        infotext.text = "on 12th november\n@ night\nin the " + myGod.GodVenue;
+        infotext.text = "on 12th november\n@ 2pm\nin the old gym \n(come to " + myGod.GodVenue +")";
     }
 
     public void closePanel()

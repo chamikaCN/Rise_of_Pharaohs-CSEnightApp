@@ -758,7 +758,7 @@ ScriptsOnlyBuild:
     className: WireframeTrackableEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 93fcb38a999a21d157a06498d3cf724d
+      Hash: fe7c90591c9e16c99c509a9d97f77ec7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: IndexHandler
@@ -1674,4 +1674,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/ARpart.unity
   - Assets/Scenes/ChoosingPart.unity
   - Assets/Scenes/InfoPart.unity
-  playerPath: C:/Users/Public/Documents/Unity Projects/AR test2/testing25.apk
+  playerPath: C:/Users/Public/Documents/Unity Projects/AR test2/Rise of Pharaohs.apk

@@ -67,7 +67,7 @@ public class infoSelector : MonoBehaviour
         "' ramses II '" + "\n" + "the gratest pharaoh ever lived, coming back to this world to fulfill his destiny";
         godParagraph2.text = myGod.GodName + " wants " + myGod.GodPronoun2 + " to be chosen as the new patreon " + myGod.GodPronoun1 + " of the new empire.it is your " +
             "responsibility to make " + myGod.GodPronoun2 + " proud or suffer the wrath of a " + myGod.GodPronoun1;
-        venueText.text = "on 12th november\n@ night\nin the " + myGod.GodVenue;
+        venueText.text = "on 12th november\n@ 2 pm\nin the old gym \n(come to " + myGod.GodVenue+ ")";
     }
 
     public void openPanel()
