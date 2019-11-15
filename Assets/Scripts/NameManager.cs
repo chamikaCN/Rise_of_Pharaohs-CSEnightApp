@@ -141,7 +141,12 @@ namespace Assets.Scripts
             nameReferance.Add(180711, "MDineth Wijesooriya");
             nameReferance.Add(180718, "FShashini Wimalaratne");
             nameReferance.Add(180722, "MYathurshan Kalanantharasan");
-            nameReferance.Add(180725, "Andrewson Croos");
+            nameReferance.Add(180725, "MAndrewson Croos");
+			nameReferance.Add(180996, "MTesting Name1");
+			nameReferance.Add(180997, "FTesting Name2");
+			nameReferance.Add(180998, "MTesting Name3");
+			nameReferance.Add(180999, "FTesting Name4");
+
         }
 
         public string getName(int index)
