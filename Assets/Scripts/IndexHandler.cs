@@ -26,7 +26,6 @@ public class IndexHandler : MonoBehaviour
  
     private void Start()
     {
-        GameManager.sendTesting();
         welcomePhrase = "when the sun sets over the nile, mummies start to roam the land of the pyramids \n.......";
         Egypt = this.GetComponent<AudioSource>();
         if (!GameManager.getIsCompleted())

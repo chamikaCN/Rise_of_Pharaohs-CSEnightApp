@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    static class GameManager 
+    static class GameManager
     {
         static God[] GodList;
         static int GroupID;
@@ -73,16 +73,11 @@ namespace Assets.Scripts
 
         public static void ReceiveSavedData()
         {
-            initial = PlayerPrefs.GetInt("Initial");
-            if (initial == 0)
-            {
-                Debug.Log("firsttime");
-                NM.sendWelcomeNotification();
-            }
+            initial = PlayerPrefs.GetInt("Initial",0);
             NameM = new NameManager();
             NameM.addItems();
-            GroupID = PlayerPrefs.GetInt("Group ID");
-            IndexNo = PlayerPrefs.GetString("IndexNo");
+            GroupID = PlayerPrefs.GetInt("Group ID",1);
+            IndexNo = PlayerPrefs.GetString("IndexNo","180996");
             completed = false;
         }
 
@@ -90,7 +85,6 @@ namespace Assets.Scripts
         {
             if (initial == 0)
             {
-                NM.sendCompleteNotification();
                 initial = 1;
                 PlayerPrefs.SetInt("Initial", initial);
             }
