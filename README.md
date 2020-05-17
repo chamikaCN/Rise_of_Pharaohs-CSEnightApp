@@ -25,13 +25,15 @@ If the app is opened for the first time this screen will show only the passcode 
 
 ### Activity Scene
 
-![Image Target](https://github.com/chamikaCN/Rise_of_Pharaohs-CSEnightApp/blob/master/ReadME%20contents/ImageTarget.jpg)
+<img src="https://github.com/chamikaCN/Rise_of_Pharaohs-CSEnightApp/blob/master/ReadME%20contents/ImageTarget.jpg" alt="Image Target]" height="800px">
+
 *Image Target*
 
 This screen requiers you to indicate the image target to the camera. After detecting the target app renders a scene with desert themed assets. There are 8 artifacts of pharaoh sculptures hidden among them. You have to find and tap on each to revel the name of the event **Rise of Paharaohs** and to proceed to next screen.
 Most assets used here are imported from [this unity package](https://assetstore.unity.com/packages/3d/environments/landscapes/desert-kits-64-sample-86482) in asset store.
 
-![Activity scene](https://github.com/chamikaCN/Rise_of_Pharaohs-CSEnightApp/blob/master/ReadME%20contents/Screenshot_20200517-135257.png)
+<img src="https://github.com/chamikaCN/Rise_of_Pharaohs-CSEnightApp/blob/master/ReadME%20contents/Screenshot_20200517-135257.png" alt="Activity scene" height="800px">
+
 *Screenshot of the scene*
 
 ### Faction Scene
@@ -39,7 +41,8 @@ Most assets used here are imported from [this unity package](https://assetstore.
 After detecting the image target you will be shown to which faction you belong with a statue of the god representing faction.
 All 4 untextured models can be found on [Free3d.com](https://free3d.com/user/printable_models) which were textured specifically for this project using Blender.
 
-![Faction scene](https://github.com/chamikaCN/Rise_of_Pharaohs-CSEnightApp/blob/master/ReadME%20contents/Screenshot_20200517-140109.png)
+<img src="https://github.com/chamikaCN/Rise_of_Pharaohs-CSEnightApp/blob/master/ReadME%20contents/Screenshot_20200517-140109.png" alt="Faction scene" height="800px">
+
 *Screenshot of the scene*
 
 ### Info Scene
