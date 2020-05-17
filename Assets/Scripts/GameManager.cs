@@ -150,10 +150,10 @@ namespace Assets.Scripts
 
         public static void sendTesting()
         {
-            NM.sendRemindNotification(new DateTime(2019, 10, 2, 23, 50, 00));
-            NM.sendRemindNotification(new DateTime(2019, 10, 2, 23, 55, 00));
-            NM.sendRemindNotification(new DateTime(2019, 10, 3, 00, 00, 00));
-            NM.sendRemindNotification(new DateTime(2019, 10, 3, 00, 05, 00));
+            // NM.sendRemindNotification(new DateTime(2019, 10, 2, 23, 50, 00));
+            // NM.sendRemindNotification(new DateTime(2019, 10, 2, 23, 55, 00));
+            // NM.sendRemindNotification(new DateTime(2019, 10, 3, 00, 00, 00));
+            // NM.sendRemindNotification(new DateTime(2019, 10, 3, 00, 05, 00));
         }
     }
 }

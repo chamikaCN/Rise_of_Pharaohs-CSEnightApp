@@ -7,7 +7,7 @@ using Assets.Scripts;
 
 
 //cannot refer mygod in methods. has to check that
-public class notificationManager : MonoBehaviour
+public class notificationManager
 {
     God myGod;
 
