@@ -1,2 +1,2 @@
-*/*/AR?TEST?2/*.vb linguist-generated
+*.shader linguist-detectable=false
 *.cs linguist-detectable=true
